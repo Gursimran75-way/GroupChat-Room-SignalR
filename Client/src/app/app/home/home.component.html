@@ -1,0 +1,32 @@
+<div class="home-container">
+  <h1>Welcome to the Chat App</h1>
+  
+  <ng-container *ngIf="authService.isLoggedIn$ | async; else notLoggedIn">
+    <div class="chat-actions">
+      <mat-form-field appearance="outline">
+        <mat-label>Room Name (Optional)</mat-label>
+        <input matInput [(ngModel)]="roomName" placeholder="Enter room name">
+      </mat-form-field>
+      
+      <button mat-raised-button color="primary" (click)="createRoom()">
+        <mat-icon>group_add</mat-icon> Create Room
+      </button>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Room ID</mat-label>
+        <input matInput [(ngModel)]="roomId" placeholder="Enter room ID">
+      </mat-form-field>
+      
+      <button mat-raised-button color="accent" (click)="joinRoom()">
+        <mat-icon>login</mat-icon> Join Room
+      </button>
+    </div>
+  </ng-container>
+
+  <ng-template #notLoggedIn>
+    <p>Please log in to create or join a chat room.</p>
+    <button mat-raised-button color="primary" routerLink="/auth/login">
+      <mat-icon>login</mat-icon> Login
+    </button>
+  </ng-template>
+</div>

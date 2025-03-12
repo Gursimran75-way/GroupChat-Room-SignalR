@@ -1,0 +1,78 @@
+<mat-card class="login-card" @fadeIn>
+  <mat-card-header class="header">
+    <mat-card-title> <mat-icon>lock</mat-icon> Login </mat-card-title>
+    <mat-card-subtitle>Sign in to your account</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <!-- Error Display -->
+    <div class="error-container" *ngIf="errorMessage">
+      <mat-icon class="error-icon">error</mat-icon>
+      <span class="error-text">{{ errorMessage }}</span>
+    </div>
+    <form
+      [formGroup]="loginForm"
+      (ngSubmit)="onSubmit()"
+      class="login-form"
+      [@shake]="errorState"
+    >
+      <mat-form-field appearance="outline" class="input-field">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          formControlName="email"
+          required
+          placeholder="Enter your email"
+        />
+        <mat-icon matPrefix>email</mat-icon>
+        <mat-error *ngIf="loginForm.get('email')?.hasError('required')"
+          >Email is required</mat-error
+        >
+        <mat-error *ngIf="loginForm.get('email')?.hasError('email')"
+          >Please enter a valid email</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="input-field">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          [type]="hidePassword ? 'password' : 'text'"
+          formControlName="password"
+          required
+          placeholder="Enter your password"
+        />
+        <mat-icon matPrefix>lock</mat-icon>
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hidePassword = !hidePassword"
+          type="button"
+        >
+          <mat-icon>{{
+            hidePassword ? "visibility_off" : "visibility"
+          }}</mat-icon>
+        </button>
+        <mat-error *ngIf="loginForm.get('password')?.hasError('required')"
+          >Password is required</mat-error
+        >
+      </mat-form-field>
+
+      <div class="actions">
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="loginForm.invalid"
+          class="submit-button"
+        >
+        <mat-icon *ngIf="!isLoading">login</mat-icon>
+        <mat-progress-spinner *ngIf="isLoading" diameter="20" mode="indeterminate"></mat-progress-spinner>
+        {{ isLoading ? '' : 'Login' }}
+        </button>
+        <a mat-button routerLink="/auth/register" class="register-link"
+          >Need an account? Register</a
+        >
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

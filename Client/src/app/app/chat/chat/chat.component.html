@@ -1,0 +1,30 @@
+<div class="chat-container">
+    <h2>Chat Room: {{ roomId }}</h2>
+    
+    <div class="users">
+      <h3>Users in Room:</h3>
+      <ul>
+        <li *ngFor="let user of usersInRoom">{{ user }}</li>
+      </ul>
+    </div>
+  
+    <div class="messages">
+      <div *ngFor="let msg of messages" class="message">
+        <span class="timestamp">{{ msg.timestamp }}</span>
+        <strong>{{ msg.user }}:</strong> {{ msg.message }}
+      </div>
+    </div>
+  
+    <div class="input-area">
+      <mat-form-field appearance="outline" class="message-input">
+        <mat-label>Message</mat-label>
+        <input matInput [(ngModel)]="newMessage" (keyup.enter)="sendMessage()">
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="sendMessage()">Send</button>
+      <button mat-raised-button color="warn" (click)="leaveRoom()">Leave Room</button>
+      <button mat-raised-button color="warn" (click)="deleteRoom()" *ngIf="(roomInfo$ | async)?.createdById === authService.getCurrentUser()?.id">
+        Delete Room
+      </button>
+      
+    </div>
+  </div>

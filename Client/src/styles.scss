@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+/* Error Toast Styling */
+.error-snackbar {
+    background-color: #d32f2f!important; 
+    color: white;
+    font-weight: 500;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  
+    .mat-snack-bar-action {
+      color: #ffffff; /* White "Close" button */
+      font-weight: bold;
+    }
+  }

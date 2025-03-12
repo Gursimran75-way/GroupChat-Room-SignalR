@@ -1,0 +1,67 @@
+<mat-card class="profile-card" @fadeIn>
+  <mat-card-header class="header">
+    <!-- <img mat-card-avatar [src]="profileImage" alt="Profile Avatar" class="avatar" /> -->
+    <mat-card-title>
+      <mat-icon>account_circle</mat-icon> Hello, {{ (authService.user$ | async)?.name }}!
+    </mat-card-title>
+    <mat-card-subtitle>Your Account Details</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content class="content">
+    <div class="profile-info" *ngIf="user$ | async as user">
+      <div class="info-item">
+        <mat-icon>email</mat-icon>
+        <span><strong>Email:</strong> {{ user.email }}</span>
+      </div>
+      <div class="info-item">
+        <mat-icon>group</mat-icon>
+        <span><strong>Role:</strong> {{ user.role }}</span>
+      </div>
+      <div class="info-item">
+        <mat-icon>check_circle</mat-icon>
+        <span><strong>Active:</strong> {{ user.isActive ? 'Yes' : 'No' }}</span>
+      </div>
+    </div>
+
+    <!-- Error Display -->
+    <div class="error-container" *ngIf="errorMessage">
+      <mat-icon class="error-icon">error</mat-icon>
+      <span class="error-text">{{ errorMessage }}</span>
+    </div>
+
+    <form [formGroup]="updateForm" (ngSubmit)="onUpdate()" class="update-form" [@shake]="errorState">
+      <mat-form-field appearance="outline" class="input-field">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" required placeholder="Update your name">
+        <mat-icon matPrefix>person</mat-icon>
+        <mat-error *ngIf="updateForm.get('name')?.hasError('required')">Name is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="input-field">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" required placeholder="Update your email">
+        <mat-icon matPrefix>email</mat-icon>
+        <mat-error *ngIf="updateForm.get('email')?.hasError('required')">Email is required</mat-error>
+        <mat-error *ngIf="updateForm.get('email')?.hasError('email')">Please enter a valid email</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="input-field">
+        <mat-label>Password</mat-label>
+        <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" required placeholder="Update your password">
+        <mat-icon matPrefix>lock</mat-icon>
+        <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
+          <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+        <mat-error *ngIf="updateForm.get('password')?.hasError('required')">Password is required</mat-error>
+      </mat-form-field>
+
+      <div class="actions">
+        <button mat-raised-button color="primary" type="submit" [disabled]="updateForm.invalid" class="action-button">
+          <mat-icon>save</mat-icon> Update Profile
+        </button>
+        <!-- <button mat-raised-button color="warn" (click)="authService.logout()" class="action-button">
+          <mat-icon>logout</mat-icon> Logout
+        </button> -->
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,21 @@
+# .NET Core
+bin/
+obj/
+*.user
+*.suo
+*.sln.docstates
+*.csproj.user
+
+# Visual Studio
+.vs/
+*.vscode/
+
+# Logs and secrets
+*.log
+appsettings.*.json  # Exclude all appsettings except base one (optional)
+!appsettings.json   # Keep the main appsettings.json
+
+# Runtime files
+*.exe
+*.dll
+*.pdb

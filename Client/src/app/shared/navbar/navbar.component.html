@@ -1,0 +1,30 @@
+<mat-toolbar color="primary" class="navbar">
+  <!-- Logo/Title Section -->
+  <div class="navbar-brand" routerLink="/app/home">
+    <mat-icon>people</mat-icon>
+    <span class="title">Home</span>
+  </div>
+
+  <!-- Spacer to push items to the right -->
+  <span class="spacer"></span>
+
+  <!-- Navigation Links -->
+  <div class="nav-links">
+    <ng-container *ngIf="!(authService.isLoggedIn$ | async); else loggedIn">
+      <a mat-raised-button routerLink="/auth/login" class="nav-button">
+        <mat-icon>login</mat-icon> Login
+      </a>
+      <a mat-raised-button routerLink="/auth/register" class="nav-button signup">
+        <mat-icon>person_add</mat-icon> Signup
+      </a>
+    </ng-container>
+    <ng-template #loggedIn>
+      <a mat-raised-button routerLink="/app/profile" class="nav-button">
+        <mat-icon>account_circle</mat-icon> Profile
+      </a>
+      <button mat-raised-button (click)="authService.logout()" class="nav-button logout">
+        <mat-icon>logout</mat-icon> Logout
+      </button>
+    </ng-template>
+  </div>
+</mat-toolbar>
