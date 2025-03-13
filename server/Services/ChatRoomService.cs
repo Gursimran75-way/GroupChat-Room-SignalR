@@ -1,21 +1,10 @@
-using System;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using chat.Data;
 using chat.Models;
+using chat.Interfaces;
 
 namespace chat.Services
-{
-    public interface IChatRoomService
-    {
-        Task<bool> CreateRoom(string roomId, Guid createdByUserId, string roomName = "Unnamed Room");
-        Task<bool> RoomExists(string roomId);
-        
-        Task<bool> DeleteRoom(string roomId, Guid userId);
-        
-        Task<ChatRoom?> GetRoomInfo(string roomId);
-    }
-
+{ 
     public class ChatRoomService : IChatRoomService
     {
         private readonly AppDbContext _context;

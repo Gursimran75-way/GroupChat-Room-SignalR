@@ -3,8 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using System.Security.Claims;
 using chat.Hubs;
-using chat.Services;
-using System.Threading.Tasks;
+using chat.Interfaces;
 
 namespace chat.Controllers
 {
@@ -14,13 +13,11 @@ namespace chat.Controllers
     public class ChatController : ControllerBase
     {
         private readonly IChatRoomService _chatRoomService;
-        private readonly IUserService _userService;
         private readonly IHubContext<ChatHub> _hubContext;
 
-        public ChatController(IChatRoomService chatRoomService, IUserService userService, IHubContext<ChatHub> hubContext)
+        public ChatController(IChatRoomService chatRoomService, IHubContext<ChatHub> hubContext)
         {
             _chatRoomService = chatRoomService;
-            _userService = userService;
             _hubContext = hubContext;
         }
 

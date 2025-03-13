@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using chat.DTOs;
-using chat.Services;
+using chat.Interfaces;
 
 namespace chat
 {

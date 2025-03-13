@@ -1,6 +1,6 @@
 ﻿using chat.DTOs;
 
-namespace chat.Services
+namespace chat.Interfaces
 {
     public interface IUserService
     {

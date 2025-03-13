@@ -1,8 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using System.Security.Claims;
-using chat.Services;
-using System.Threading.Tasks;
+using chat.Interfaces;
 
 namespace chat.Hubs
 {

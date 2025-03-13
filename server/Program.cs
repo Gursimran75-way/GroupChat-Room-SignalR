@@ -6,6 +6,7 @@ using System.Text;
 using chat.Data;
 using chat.Services;
 using chat.Hubs;
+using chat.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 

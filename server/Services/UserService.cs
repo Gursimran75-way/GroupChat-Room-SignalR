@@ -7,6 +7,7 @@ using System.Text;
 using chat.Data;
 using chat.DTOs;
 using chat.Models;
+using chat.Interfaces;
 
 namespace chat.Services
 {
